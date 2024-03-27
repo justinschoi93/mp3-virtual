@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mp3 player</title>
+    <link rel="stylesheet" href="./src/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="music-player">
+            <div class="media-display">
+                <div class="thumbnail">
+                    <img src="" alt="album-photo" placeholder="album-cover">
+                    <img src="" alt="artist-photo hidden" placeholder="artist-photo">
+                </div>
+                <div class="track">I Got You (I Feel Good)</div>
+                <div class="artist">James Brown</div>
+                <div class="album">I Got You (I Feel Good)</div>
+                <div class="progress-bar" onclick="progressBar()">--$-------------------</div>
+            </div>
+            <media>
+                <audio class="track" id="Chopin-Opus-9-No.-1-B-flat-Minor" src="./tracks/01 Track 1.mp3"></audio>
+                <audio class="track" id="Chopin-Opus-9-No.-2-E-flat-Major" src="./tracks/02 Track 2.mp3"></audio>
+            </media>
+            <div class="media-controls">
+                <div class="media-control-button rewind" >
+                    <img src="./images/rewind.svg" alt="rewind" onclick="rewindButton()">
+                </div>
+                <div class="media-control-button play" onclick="playButton()">
+                    <img src="./images/play.svg" alt="play">
+                </div>
+                <div class="media-control-button pause hidden" onclick="pauseButton()">
+                    <img src="./images/pause.svg" alt="pause">
+                </div>
+                <div class="media-control-button fast-forward" onclick="fastforwardButton()">
+                    <img src="./images/fastforward.svg" alt="fast-forward">
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    <script src="./src/script.js"></script>
+</body>
+</html>
