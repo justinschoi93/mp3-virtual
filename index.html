@@ -7,19 +7,25 @@
     <link rel="stylesheet" href="./src/style.css">
 </head>
 <body>
+    <header>
+        <h1>Music Player</h1>
+    </header>
     <div class="container">
         <div class="music-player">
             <div class="media-display">
-                <div class="thumbnail">
-                    <img src="" alt="album-photo" placeholder="album-cover">
-                    <img src="" alt="artist-photo hidden" placeholder="artist-photo">
+                <div class="thumbnail-container">
+                    <img src="./images/I_Got_You_(I_Feel_Good)_(album).jpeg" alt="album-photo" placeholder="album-cover" class="thumbnail">
+                    <img src="./images/JamesBrown.jpg" alt="artist-photo " placeholder="artist-photo" class="thumbnail hidden">
                 </div>
                 <div class="track">I Got You (I Feel Good)</div>
                 <div class="artist">James Brown</div>
                 <div class="album">I Got You (I Feel Good)</div>
-                <div class="progress-bar" onclick="progressBar()">--$-------------------</div>
+                <div class="progress-bar" onclick="progressBar()">
+                    <div class="dot"></div>
+                </div>
             </div>
             <media>
+                <audio class="track" id="I-Feel-Good" src="./tracks/07IGotYouiFeelGood.mp3"></audio>
                 <audio class="track" id="Chopin-Opus-9-No.-1-B-flat-Minor" src="./tracks/01 Track 1.mp3"></audio>
                 <audio class="track" id="Chopin-Opus-9-No.-2-E-flat-Major" src="./tracks/02 Track 2.mp3"></audio>
             </media>

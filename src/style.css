@@ -2,33 +2,116 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+
 }
 
-.hidden{
-    display: none;
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
 }
 
 .container {
-    width: 100%;
-    height: 100vh;
+    background-image: linear-gradient(#a6a6a6 42.44%, #fff 84.87%);
+    width: 500px;
+    height: 844px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 10px
 }
 
 .music-player {
+    display: flex;
+    flex-direction: column;
     width: 400px;
     padding: 25px 35px;
+    
     text-align: center;
 }
 
-nav {
+.media-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.media-display > * {
+    margin-bottom: 20px;
+
+}
+
+.media-controls {
+    width: 300px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin: 20px 20px 20px;
+}
+
+.media-control-button {
+    width: 75px;
+    height: 75px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 50%;
+}
+
+.media-control-button img {
+    width: 50px;
+    height: 50px;
+
+}
+
+/* nav {
     display: flex;
     justify-content: space-between;
     
+} */
+
+.thumbnail-container {
+    width: 300px;
+    height: 300px;
+    border-style: solid;
+    border-radius: 20px;
+    border-width: 2px;
+    overflow: hidden;
 }
-.media-control-button {
-    width: 50px;
-    border:
+.thumbnail img {
+    height: 100%;
+    width: 100%;
+}
+
+.progress-bar {
+    width: 300px;
+    height: 10px;
+    background-color: #000000;
+    border-radius: 10px;
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    border: 10px solid #000000;
+    
+}
+
+.hidden{
+    display: none;
 }
