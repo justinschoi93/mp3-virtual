@@ -17,29 +17,31 @@
                     <img src="./images/I_Got_You_(I_Feel_Good)_(album).jpeg" alt="album-photo" placeholder="album-cover" class="thumbnail">
                     <img src="./images/JamesBrown.jpg" alt="artist-photo " placeholder="artist-photo" class="thumbnail hidden">
                 </div>
-                <div class="track">I Got You (I Feel Good)</div>
-                <div class="artist">James Brown</div>
-                <div class="album">I Got You (I Feel Good)</div>
-                <div class="progress-bar" onclick="progressBar()">
-                    <div class="dot"></div>
+                <div class="track-info">
+                    <div class="track">I Got You (I Feel Good)</div>
+                    <div class="artist">James Brown</div>
+                    <div class="album">I Got You (I Feel Good)</div>
+                    <div class="progress-bar" id="progress-bar"></div>
+                    <div class="progress-bar" id="the-bar" onclick="progressBar()" ></div>
+                    <div class="progress-bar" id="the-dot"></div>
                 </div>
             </div>
             <media>
-                <audio class="track" id="I-Feel-Good" src="./tracks/07IGotYouiFeelGood.mp3"></audio>
+                <audio class="track current-track" id="I-Feel-Good" src="./tracks/07IGotYouiFeelGood.mp3"></audio>
                 <audio class="track" id="Chopin-Opus-9-No.-1-B-flat-Minor" src="./tracks/01 Track 1.mp3"></audio>
                 <audio class="track" id="Chopin-Opus-9-No.-2-E-flat-Major" src="./tracks/02 Track 2.mp3"></audio>
             </media>
             <div class="media-controls">
                 <div class="media-control-button rewind" >
-                    <img src="./images/rewind.svg" alt="rewind" onclick="rewindButton()">
+                    <img src="./images/rewind.svg" alt="rewind" onclick="back()" id="rwd-button">
                 </div>
-                <div class="media-control-button play" onclick="playButton()">
+                <div class="media-control-button play" onclick="playTrack()" id="play-button">
                     <img src="./images/play.svg" alt="play">
                 </div>
-                <div class="media-control-button pause hidden" onclick="pauseButton()">
+                <div class="media-control-button pause hidden" onclick="pauseTrack()" id="pause-button">
                     <img src="./images/pause.svg" alt="pause">
                 </div>
-                <div class="media-control-button fast-forward" onclick="fastforwardButton()">
+                <div class="media-control-button fast-forward" onclick="skip()" id="ff-button">
                     <img src="./images/fastforward.svg" alt="fast-forward">
                 </div>
             </div>
