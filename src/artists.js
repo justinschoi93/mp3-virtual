@@ -1,0 +1,1 @@
+export const artists = ['Blue Hawaii', 'Blink-182', 'The Strokes'];
