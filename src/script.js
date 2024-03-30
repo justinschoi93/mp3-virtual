@@ -7,6 +7,7 @@ let timeElapsed = 0;
 let audioElement; 
 let album = albums[0];
 let artist = albums[0].artist;
+console.log(artist);
 let current = album.tracks[albumIdx]
 
 // Select Menus
@@ -48,9 +49,9 @@ artistSelect.addEventListener('change', () => {
 })
 
 // Media Info
-const trackNameD = document.querySelector('.track');
-const trackArtistD = document.querySelector('.artist');
-const trackAlbumD = document.querySelector('.album');
+const trackNameD = document.querySelector('#track-title');
+const trackArtistD = document.querySelector('#track-artist');
+const trackAlbumD = document.querySelector('#track-album');
 const albumCoverD = document.getElementById('album-cover');
 
 // Media Controller
@@ -66,9 +67,11 @@ let intervalID;
 
 function displayTrack (track) {
     albumCoverD.src = album.albumArt ? album.albumArt : album.altPhoto;
-    trackNameD.textContent = track.title;
-    trackArtistD.textContent = track.artist;
-    trackAlbumD.textContent = track.album;
+    trackNameD.innerHTML = track.title;
+    trackArtistD.innerHTML = track.artist;
+    trackAlbumD.innerHTML = track.album;
+
+    console.log(albumCoverD.src, trackNameD.textContent, trackArtistD.textContent, trackAlbumD.textContent);
 }
 
 
