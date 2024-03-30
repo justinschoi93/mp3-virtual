@@ -1,4 +1,4 @@
-const BlueHawaii = {
+export const BlueHawaii = {
     name: 'Untogether',
     artist: 'Blue Hawaii',
     releaseInfo: '2013',
@@ -8,70 +8,173 @@ const BlueHawaii = {
         {
             track: 1,
             title: 'Follow',
-            length: '5:06',
-            src: '../Blue Hawii/Untogether/01 Follow.m4p'
+            artist: 'Blue Hawaii',
+            album: 'Untogether',
+            duration: '5:06',
+            src: '../BlueHawii/Untogether/01-Follow.m4p'
         },
         {
             track: 2,
             title: 'Try to Be',
-            length: '3:58',
-            src: '../Blue Hawaii/Untogether/02 Try to Be.m4p'
+            artist: 'Blue Hawaii',
+            album: 'Untogether',
+            duration: '3:58',
+            src: '../BlueHawaii/Untogether/02-Try-to-Be.m4p'
         },
         {
             track: 3,
             title: 'In Two',
-            length: '3:54',
-            src: '../Blue Hawaii/Untogether/03 In Two.m4p'
+            artist: 'Blue Hawaii',
+            album: 'Untogether',
+            duration: '3:54',
+            src: '../BlueHawaii/Untogether/03-In-Two.m4p'
         },
         {
             track: 4,
             title: 'In Two II',
-            length: '3:54',
-            src: '../Blue Hawaii/Untogether/04 In Two II.m4p'
+            artist: 'Blue Hawaii',
+            album: 'Untogether',
+            duration: '3:54',
+            src: '../BlueHawaii/Untogether/04-In-Two-II.m4p'
         },
         {
             track: 5,
             title: 'Sweet Tooth',
-            length: '3:54',
-            src: '../Blue Hawaii/Untogether/05 Sweet Tooth.m4p'
+            artist: 'Blue Hawaii',
+            album: 'Untogether',
+            duration: '3:54',
+            src: '../BlueHawaii/Untogether/05-Sweet-Tooth.m4p'
         },
         {
             track: 6,
             title: 'Sierra Lift',
-            length: '3:54',
-            src: '../Blue Hawaii/Untogether/06 Sierra Lift.m4p'
+            artist: 'Blue Hawaii',
+            album: 'Untogether',
+            duration: '3:54',
+            src: '../BlueHawaii/Untogether/06-Sierra-Lift.m4p'
         },
         {
             track: 7,
             title: 'Yours to Keep',
-            length: '3:54',
-            src: '../Blue Hawaii/Untogether/07 Yours to Keep.m4p'
+            artist: 'Blue Hawaii',
+            album: 'Untogether',
+            duration: '3:54',
+            src: '../BlueHawaii/Untogether/07-Yours-to-Keep.m4p'
         },
         {
             track: 8,
             title: 'Daisy',
-            length: '3:54',
-            src: '../Blue Hawaii/Untogether/08 Daisy.m4p'
+            artist: 'Blue Hawaii',
+            album: 'Untogether',
+            duration: '3:54',
+            src: '../BlueHawaii/Untogether/08-Daisy.m4p'
         },
         {
             track: 9,
             title: 'Flammarion',
-            length: '3:54',
-            src: '../Blue Hawaii/Untogether/09 Flammarion.m4p'
+            artist: 'Blue Hawaii',
+            album: 'Untogether',
+            duration: '3:54',
+            src: '../BlueHawaii/Untogether/09-Flammarion.m4p'
         },
         {
             track: 10,
             title: 'Reaction II',
-            length: '3:54',
-            src: '../Blue Hawaii/Untogether/10 Reaction II.m4p'
+            artist: 'Blue Hawaii',
+            album: 'Untogether',
+            duration: '3:54',
+            src: '../BlueHawaii/Untogether/10-Reaction-II.m4p'
         },
         {
             track: 11,
             title: 'The Other Day',
-            length: '3:54',
-            src: '../Blue Hawaii/Untogether/11 The Other Day.m4p'
+            artist: 'Blue Hawaii',
+            album: 'Untogether',
+            duration: '3:54',
+            src: '../BlueHawaii/Untogether/11-The-Other-Day.m4p'
         }
     ]
 };
 
-export default BlueHawaii;
+
+export const EnemaOfTheState = {
+    name: 'Enema of the State',
+    artist: 'Blink-182',
+    releaseInfo: '1999',
+    albumArt: '../images/EnemaOfTheState.jpg',
+    altPhoto: '',
+    tracks: [
+        {
+            track: 1,
+            title: 'Dumpweed',
+            artist: 'Blink-182',
+            album: 'Enema of the State',
+            duration: '2:23',
+            src: "../EnemaOfTheState/Adam's-Song.mp3"
+        },
+        {
+            track: 2,
+            title: 'Don\'t Leave Me',
+            artist: 'Blink-182',
+            album: 'Enema of the State',
+            duration: '2:23',
+            src: "../Blink-182/EnemaOfTheState/Don't-Leave-Me.mp3"
+        },
+        {
+            track: 3,
+            title: 'Aliens Exist',
+            artist: 'Blink-182',
+            album: 'Enema of the State',
+            duration: '2:23',
+            src: '../Blink-182/EnemaOfTheState/Aliens-Exist.mp3'
+        },
+        {
+            track: 4,
+            title: 'Going Away to College',
+            artist: 'Blink-182',
+            album: 'Enema of the State',
+            duration: '2:23',
+            src: '../Blink-182/EnemaOfTheState/Going-Away-to-College.mp3'
+        },
+        {
+            track: 5,
+            title: 'What\'s My Age Again?',
+            artist: 'Blink-182',
+            album: 'Enema of the State',
+            duration: '2:23',
+            src: '../Blink-182/EnemaOfTheState/Whats-My-Age-Again.mp3'
+        },
+        {
+            track: 6,
+            title: 'Dysentery Gary',
+            artist: 'Blink-182',
+            album: 'Enema of the State',
+            duration: '2:23',
+            src: '../Blink-182/EnemaOfTheState/Dysentery-Gary.mp3'
+        },
+        {
+            track: 7,
+            title: 'Adam\'s Song',
+            artist: 'Blink-182',
+            album: 'Enema of the State',
+            duration: '2:23',
+            src: '../Blink-182/EnemaOfTheState/Adams-Song.mp3'
+        },
+        {
+            track: 8,
+            title: 'All the Small Things',
+            artist: 'Blink-182',
+            album: 'Enema of the State',
+            duration: '2:23',
+            src: '../Blink-182/EnemaOfTheState/All-The-Small-Things.mp3'
+        },
+        {
+            track: 9,
+            title: 'The Party Song',
+            artist: 'Blink-182',
+            album: 'Enema of the State',
+            duration: '2:23',
+            src: '../Blink-182/EnemaOfTheState/The-Party-Song.mp3'
+        }
+    ]
+}
