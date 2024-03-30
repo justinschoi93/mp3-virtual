@@ -15,22 +15,29 @@ const theDot = document.getElementById('the-dot');
 const albumCover = document.getElementById('album-cover');
 const artistPhoto = document.getElementById('artist-photo');
 
-const track = {
-    name: BlueHawaii.tracks[0].name,
-    artist: BlueHawaii.tracks[0].artist,
-    album: BlueHawaii.tracks[0].album,
-    src: BlueHawaii.tracks[0].src,
-    img: BlueHawaii.albumArt ? BlueHawaii.albumArt : BlueHawaii.altPhoto
-}
-
-function displayProgress() {
+let albumIdx = 0;
+let timeElapsed = 0;
     
+function displayTrack (track) {
+
+}
+function displayProgress() {
+    setInterval(()=>{}, 500)
 }
 
 function back() {}
 
-function playTrack(){
+function playTrack(track){
     track.play()
+    displayTrack(track);
+    setInterval(timeElapsed++, 1000);
+    
+    if (timeElapsed === track.duration) {
+        timeElapsed = 0;
+        albumIdx++;
+        playTrack(album.tracks[albumIdx]);
+    }
+
 }
 
 function pauseTrack(){}
