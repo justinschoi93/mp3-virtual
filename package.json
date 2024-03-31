@@ -1,0 +1,25 @@
+{
+  "name": "mp3-player",
+  "version": "1.0.0",
+  "description": "",
+  "main": "script.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/justinschoi93/mp3-player.git"
+  },
+  "keywords": [
+    "mp3",
+    "player",
+    "media"
+  ],
+  "author": "J",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/justinschoi93/mp3-player/issues"
+  },
+  "homepage": "https://github.com/justinschoi93/mp3-player#readme"
+}

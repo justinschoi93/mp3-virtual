@@ -259,5 +259,9 @@ const TheNewAbnormal = {
             duration: '5:50',
             src: '../music/TheStrokes/TheNewAbnormal/OdetotheMets.mp3'
         }]
-    }
-export const albums = [TheNewAbnormal, BlueHawaii, EnemaOfTheState];
+    };
+
+    export const albums = [TheNewAbnormal, BlueHawaii, EnemaOfTheState];
+
+    
+    

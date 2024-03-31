@@ -1,0 +1,16 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Launch Chrome against localhost",
+        "type": "chrome",
+        "request": "launch",
+        "url": "http://127.0.0.1:5500/index.html",
+        "webRoot": "${workspaceFolder}",
+        "sourceMaps": true,
+        "breakOnLoad": true,
+        "skipFiles": ["node_modules/**/*.js"]
+      }
+    ]
+  }
+  
