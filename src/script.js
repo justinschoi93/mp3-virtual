@@ -58,7 +58,7 @@ const albumCoverD = document.getElementById('album-cover');
 const playButton = document.getElementById('play-button');
 const pauseButton = document.getElementById('pause-button');
 const rewindButton = document.getElementById('rwd-button');
-const fastforwardButton = document.getElementById('ff-button');
+const skipButton = document.getElementById('ff-button');
 const theBar = document.getElementById('the-bar');
 const theDot = document.getElementById('the-dot');
 
@@ -66,18 +66,18 @@ const theDot = document.getElementById('the-dot');
 let intervalID;
 
 function displayTrack (track) {
+    console.log(track)
     albumCoverD.src = album.albumArt ? album.albumArt : album.altPhoto;
     trackNameD.innerHTML = track.title;
     trackArtistD.innerHTML = track.artist;
     trackAlbumD.innerHTML = track.album;
-
-    console.log(albumCoverD.src, trackNameD.textContent, trackArtistD.textContent, trackAlbumD.textContent);
 }
 
 
 function playTrack(track){
 
-    console.log(track)
+    console.log('track: ' + track)
+    displayTrack(track);
 
     if (!albumSelect.value){ 
         console.log('No track found');
@@ -85,15 +85,23 @@ function playTrack(track){
 
     playButton.style.display = 'none';
     pauseButton.style.display = 'block';
-    displayTrack(track);
-    audioElement = new Audio(track.src);
-    audioElement.play().catch(error => console.error("Audio play failed:", error));    displayTrack(track);
+
+    if (timeElapsed === 0) {
+        audioElement = new Audio(track.src);
+    }
+
+    audioElement.play().catch(error => console.error("Audio play failed:", error));    
+    
+    // Keep track of time elapsed
     intervalID = setInterval(() => {
+        
         timeElapsed++;
+
         let durationSplit = track.duration.split(':');
-        let durationSeconds = durationSplit[0] * 60 + durationSplit[1];
+        let durationSeconds = parseInt(durationSplit[0] * 60) + parseInt(durationSplit[1]);
         theDot.style.left = `${timeElapsed / durationSeconds * 100}%`;
         
+        // End of Track behavior
         if (timeElapsed === durationSeconds) {
             timeElapsed = 0;
             albumIdx++;
@@ -106,30 +114,41 @@ function playTrack(track){
 function pauseTrack(audioElement){
     playButton.style.display = 'block';
     pauseButton.style.display = 'none';
+
     audioElement.pause();
-    clearInterval(intervalID)
+    
+    clearInterval(intervalID);
 }
 
-function back() {
+function back(audioElement) {
     if (timeElapsed > 5) {
+        audioElement.pause();
+
         timeElapsed = 0;
-        playTrack(album.tracks[albumIdx]);
+
+        playTrack(current);
+
     } else {
+        audioElement.pause();
         albumIdx--;
-        playTrack(album.tracks[albumIdx]);
+        current = album.tracks[albumIdx]
+        playTrack(current);
     }
 }
 
 function skip(){
+    audioElement.pause();
     albumIdx++;
-    playTrack(album.tracks[albumIdx]);
+    current = album.tracks[albumIdx]
+    console.log(current);
+    playTrack(current);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
     playButton.addEventListener('click', ()=>playTrack(current));
     pauseButton.addEventListener('click', ()=>pauseTrack(audioElement));
     rewindButton.addEventListener('click', back);
-    fastforwardButton.addEventListener('click', skip);
+    skipButton.addEventListener('click', skip);
     // theDot.addEventListener('click', ()=>{}); // TODO: updateTimeElapsed()
     // theDot.addEventListener('mousedown', () => {
     //     track.pause();
