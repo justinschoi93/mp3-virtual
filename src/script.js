@@ -1,5 +1,6 @@
 import { albums } from './albums.js';
 import { artists } from './artists.js';
+import { _ } from 'lodash'
 
 // Current Track Info
 let power = false;
