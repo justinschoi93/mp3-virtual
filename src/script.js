@@ -1,5 +1,5 @@
 import { albums } from './albums.js';
-// import { artists } from './artists.js';
+import { artists } from './artists.js';
 
 // Current Track Info
 let power = false;
@@ -11,7 +11,7 @@ let artist = albums[0].artist;
 let current = album.tracks[albumIdx]
 
 // Select Menus
-// const artistfrfSelect = document.getElementById('artist-select');
+const artistSelect = document.getElementById('artist-select');
 const albumSelect = document.getElementById('album-select');
 const trackSelect = document.getElementById('track-select');
 
@@ -32,15 +32,28 @@ album.tracks.forEach((track, i) => {
     trackSelect.appendChild(option);
 })
 
-// artists.forEach((artist, i) => {
-//     let option = document.createElement('option');
-//     option.text = artist;
-//     option.idx = i;
-//     artistSelect.appendChild(option);
-// })
+artists.forEach((artist, i) => {
+    let option = document.createElement('option');
+    option.text = artist;
+    option.idx = i;
+    artistSelect.appendChild(option);
+})
 
 // The selected option, which will be a string, will be used to select the correct object in the album array.
 // THe album object will be assgned as the value of album
+artistSelect.addEventListener('change', () => {
+    artist = artistSelect.value;
+    
+    albumSelect.innerHTML = ''; // Clear out old options
+    albumSelect = albums.forEach((album, i) => { // Add new options
+        if (album.artist === artist) {
+            const option = document.createElement('option');
+            option.text = album.name;
+            albumSelect.appendChild(option);
+        }
+    })
+})
+
 albumSelect.addEventListener('change', () => {
     album = albums.find((a, i) => a.name === albumSelect.value);
     console.log(album);
@@ -71,10 +84,6 @@ trackSelect.addEventListener('change', () => {
     }
 })
 
-// artistSelect.addEventListener('change', () => {
-//     artist = artists.find((artist, i) => artist === artistSelect.value);
-//     artistSelect.value = artist;
-// })
 
 // Media Info
 

@@ -11,14 +11,22 @@
     <header>
         <div class="logo" id="logo-container"><img class="logo" id="logo"></div>
         <h1>Music Player</h1>
-        <!-- <select class="artist" id="artist-select"></select> -->
-        <div>
+        <div class="select-labels">
+            <label for="artist-select">Artists: </label>
             <label for="album-select">Albums: </label>
-            <select class="albums" id="album-select"></select>
-        </div>
-        <div>
             <label for="track-select">Tracks: </label>
-            <select class="tracks" id="track-select"></select>
+
+        </div>
+        <div class="select-menus">
+            <div class="select-menu">
+                <select class="artist" id="artist-select"></select>
+            </div>
+            <div class="select-menu">
+                <select class="albums" id="album-select"></select>
+            </div>
+            <div class="select-menu">
+                <select class="tracks" id="track-select"></select>
+            </div>
         </div>
     </header>
     <div class="container">
@@ -28,9 +36,9 @@
                     <img src="" alt="album-photo" placeholder="album-cover" class="thumbnail" id="album-cover">
                 </div>
                 <div class="track-info">
-                    <div class="track" id="track-title">track</div>
                     <div class="artist" id="track-artist">artist</div>
                     <div class="album" id="track-album">album</div>
+                    <div class="track" id="track-title">track</div>
                     <div class="progress-bar" id="progress-bar">
                         <div class="progress-bar" id="the-dot"></div>
                         <div class="progress-bar" id="the-bar"></div>

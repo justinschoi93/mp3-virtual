@@ -4,10 +4,10 @@
     box-sizing: border-box;
 
 }
+
 header {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
     align-items: center;
     width: 100%;
     height: 100px;
@@ -19,7 +19,20 @@ header {
 
 header > * {
     margin: 10px;
+}
 
+header > .select-labels {
+    display: flex;
+    flex-direction: column;
+    margin: 5px 5px 5px auto;
+}
+
+header > .select-menus {
+    margin: 5px 40px 5px 5px;
+}
+
+.select-menu {
+    width: 100%;
 }
 
 body{
