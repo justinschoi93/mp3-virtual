@@ -1,7 +1,8 @@
 import { albums } from './albums.js';
-import { artists } from './artists.js';
+// import { artists } from './artists.js';
 
 // Current Track Info
+let power = false;
 let albumIdx = 0;
 let timeElapsed = 0;
 let audioElement; 
@@ -26,6 +27,7 @@ albums.forEach( (album, i) => {
 album.tracks.forEach((track, i) => {
     let option = document.createElement('option');
     option.idx = i;
+    option.value = track.title;
     option.text = `${option.idx + 1} - ${track.title}` ;
     trackSelect.appendChild(option);
 })
@@ -45,47 +47,37 @@ albumSelect.addEventListener('change', () => {
     albumSelect.value = album.name;
     artist = album.name;
     // artistSelect.value = album.artist;
-    current = album.tracks[0];
+
+    current = album.tracks.find((track, i) => track.title === trackName);
     displayTrack(current);
 })
 
 trackSelect.addEventListener('change', () => {
-    let albumIdx = trackSelect.value.split(' - ')[0] - 1;
-    let trackName = trackSelect.value.split(' - ')[1];
+
+    console.log('trackSelect.value:', trackSelect.value)
+    let trackName = trackSelect.value;
 
     if (playButton.style.display === 'none') {
         
-        album.tracks.find( track, i => {
-                if (track.title === trackSelect.value) {
-                    current = track;
-                    audioElement.pause();
-                    audioElement = new Audio(current.src);
-                    console.log(`Selected: ${trackName}`)
-                    playTrack(current);
-                } 
-            
-        });
+        audioElement.pause();
+        current = album.tracks.name;
 
+        displayTrack(current);
         pauseTrack(audioElement);
     } else {
-        album.tracks.find( (track, i) => {
-            if (track.title === trackSelect.value) {
-                current = track;
-                audioElement.pause();
-                audioElement = new Audio(current.src);
-                console.log(`Selected: ${trackName}`)
-
-            } 
         
-    });
+        current = album.tracks.find((track, i) => track.title === trackName);
+        displayTrack(current);
     }
 })
+
 // artistSelect.addEventListener('change', () => {
 //     artist = artists.find((artist, i) => artist === artistSelect.value);
 //     artistSelect.value = artist;
 // })
 
 // Media Info
+
 const trackNameD = document.querySelector('#track-title');
 const trackArtistD = document.querySelector('#track-artist');
 const trackAlbumD = document.querySelector('#track-album');
@@ -111,7 +103,7 @@ function displayTrack (track) {
 
 
 function playTrack(track){
-    
+    if (!power) power = 'on';
     displayTrack(track);
     
     if (!albumSelect.value){ 
