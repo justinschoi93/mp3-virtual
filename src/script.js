@@ -1,5 +1,13 @@
+// media content
 import { albums } from './albums.js';
 import { artists } from './artists.js';
+// media controlls
+import playButtonIcon from '../images/play-button.png';
+import pauseButtonIcon from '../images/pause-button.png';
+import rewindButtonIcon from '../images/rewind-button.png';
+import skipButtonIcon from '../images/skip-button.png';
+
+
 import './style.css';
 // 
 // Current Track Info

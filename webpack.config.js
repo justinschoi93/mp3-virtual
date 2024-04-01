@@ -4,6 +4,7 @@ import path from 'path';
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import WorkboxWebpackPlugin from "workbox-webpack-plugin";
+import CopyWebpackPlugin from 'copy-webpack-plugin';
 import webpack from 'webpack';
 const { HotModuleReplacementPlugin } = webpack;
 import  {fileURLToPath}  from 'url';
@@ -49,6 +50,12 @@ const config = {
             template: 'index.html',
         }),
         new HotModuleReplacementPlugin(),
+        new CopyWebpackPlugin({
+            patterns: [
+                { from: 'images', to: 'assets/images' },
+                { from: 'music', to: 'assets/music' }
+            ]
+        }),
 
         // Add your plugins here
         // Learn more about plugins from https://webpack.js.org/configuration/plugins/
