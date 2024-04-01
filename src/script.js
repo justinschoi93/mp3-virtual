@@ -60,7 +60,7 @@ albumSelect.addEventListener('change', () => {
     console.log(album);
     albumSelect.value = album.name;
     artist = album.name;
-    // artistSelect.value = album.artist;
+    // Make tracklist responsive
 
     current = album.tracks.find((track, i) => track.title === trackName);
     displayTrack(current);

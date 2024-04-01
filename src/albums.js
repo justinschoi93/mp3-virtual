@@ -7,6 +7,7 @@ import AtTheDoor from '../music/TheStrokes/TheNewAbnormal/AttheDoor.mp3';
 import WhyAreSundaysSoDepressing from '../music/TheStrokes/TheNewAbnormal/WhyAreSundaysSoDepressing.mp3';
 import NotTheSameAnymore from '../music/TheStrokes/TheNewAbnormal/NottheSameAnymore.mp3';
 import OdeToTheMets from '../music/TheStrokes/TheNewAbnormal/OdetotheMets.mp3';
+import TheNewAbnormal from '../images/TheNewAbnormal.png';
 
 const BlueHawaii = {
     name: 'Untogether',
@@ -194,7 +195,7 @@ const TheNewAbnormal = {
     name: 'The New Abnormal',
     artist: 'The Strokes',
     releaseInfo: '2020',
-    albumArt: '../images/TheNewAbnormal.png',
+    albumArt: TheNewAbnormal,
     tracks: [
         {
             track: 1,
