@@ -1,7 +1,7 @@
 import { albums } from './albums.js';
 import { artists } from './artists.js';
 import { _ } from 'lodash'
-
+// 
 // Current Track Info
 let power = false;
 let albumIdx = 0;
@@ -124,7 +124,7 @@ function playTrack(track){
     pauseButton.style.display = 'block';
     
     if (timeElapsed === 0) {
-        audioElement = new Audio(track.src);
+        audioElement = new Audio(track.file);
     }
     
     audioElement.play().catch(error => console.error("Audio play failed:", error));    
@@ -177,7 +177,7 @@ function back() {
             if (albumIdx > 1) albumIdx--;
             audioElement.pause();
             current = album.tracks[albumIdx]
-            audioElement = new Audio(current.src)
+            audioElement = new Audio(current.file)
 
             playTrack(current);
         }
@@ -186,7 +186,7 @@ function back() {
 
         if (albumIdx > 1) albumIdx--;
         current = album.tracks[albumIdx];
-        audioElement = new Audio(current.src);
+        audioElement = new Audio(current.file);
     }
 }
 
@@ -197,14 +197,14 @@ function skip(){
         audioElement.pause();
         albumIdx === album.tracks.length - 1 ? albumIdx = 0 : albumIdx++;
         current = album.tracks[albumIdx]
-        audioElement = new Audio(current.src);
+        audioElement = new Audio(current.file);
 
         playTrack(current);
     } else {
         console.log('skipped track: ', current)
         albumIdx === album.tracks.length - 1 ? albumIdx = 0 : albumIdx++;
         current = album.tracks[albumIdx];
-        audioElement = new Audio(current.src);
+        audioElement = new Audio(current.file);
 
         displayTrack(current)
     }

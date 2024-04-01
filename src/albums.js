@@ -1,3 +1,13 @@
+import TheAdultsAreTalking from '../music/TheStrokes/TheNewAbnormal/TheAdultsAreTalking.mp3';
+import Selfless from '../music/TheStrokes/TheNewAbnormal/Selfless.mp3';
+import BrooklynBridgeToChorus from '../music/TheStrokes/TheNewAbnormal/BrooklynBridgetoChorus.mp3';
+import BadDecisions from '../music/TheStrokes/TheNewAbnormal/BadDecisions.mp3';
+import EternalSummer from '../music/TheStrokes/TheNewAbnormal/EternalSummer.mp3';
+import AtTheDoor from '../music/TheStrokes/TheNewAbnormal/AttheDoor.mp3';
+import WhyAreSundaysSoDepressing from '../music/TheStrokes/TheNewAbnormal/WhyAreSundaysSoDepressing.mp3';
+import NotTheSameAnymore from '../music/TheStrokes/TheNewAbnormal/NottheSameAnymore.mp3';
+import OdeToTheMets from '../music/TheStrokes/TheNewAbnormal/OdetotheMets.mp3';
+
 const BlueHawaii = {
     name: 'Untogether',
     artist: 'Blue Hawaii',
@@ -11,7 +21,7 @@ const BlueHawaii = {
             artist: 'Blue Hawaii',
             album: 'Untogether',
             duration: '5:06',
-            src: '../music/BlueHawii/Untogether/01-Follow.m4p'
+            file: TheAdultsAreTalking
         },
         {
             track: 2,
@@ -19,7 +29,7 @@ const BlueHawaii = {
             artist: 'Blue Hawaii',
             album: 'Untogether',
             duration: '3:58',
-            src: '../music/BlueHawaii/Untogether/02-Try-to-Be.m4p'
+            file: TryToBe
         },
         {
             track: 3,
@@ -27,7 +37,7 @@ const BlueHawaii = {
             artist: 'Blue Hawaii',
             album: 'Untogether',
             duration: '3:54',
-            src: '../music/BlueHawaii/Untogether/03-In-Two.m4p'
+            file: InTwo
         },
         {
             track: 4,
@@ -35,7 +45,7 @@ const BlueHawaii = {
             artist: 'Blue Hawaii',
             album: 'Untogether',
             duration: '3:54',
-            src: '../music/BlueHawaii/Untogether/04-In-Two-II.m4p'
+            file: '../music/BlueHawaii/Untogether/04-In-Two-II.m4p'
         },
         {
             track: 5,
@@ -43,7 +53,7 @@ const BlueHawaii = {
             artist: 'Blue Hawaii',
             album: 'Untogether',
             duration: '3:54',
-            src: '../music/BlueHawaii/Untogether/05-Sweet-Tooth.m4p'
+            file: '../music/BlueHawaii/Untogether/05-Sweet-Tooth.m4p'
         },
         {
             track: 6,
@@ -51,7 +61,7 @@ const BlueHawaii = {
             artist: 'Blue Hawaii',
             album: 'Untogether',
             duration: '3:54',
-            src: '../music/BlueHawaii/Untogether/06-Sierra-Lift.m4p'
+            file: '../music/BlueHawaii/Untogether/06-Sierra-Lift.m4p'
         },
         {
             track: 7,
@@ -59,7 +69,7 @@ const BlueHawaii = {
             artist: 'Blue Hawaii',
             album: 'Untogether',
             duration: '3:54',
-            src: '../music/BlueHawaii/Untogether/07-Yours-to-Keep.m4p'
+            file: '../music/BlueHawaii/Untogether/07-Yours-to-Keep.m4p'
         },
         {
             track: 8,
@@ -67,7 +77,7 @@ const BlueHawaii = {
             artist: 'Blue Hawaii',
             album: 'Untogether',
             duration: '3:54',
-            src: '../music/BlueHawaii/Untogether/08-Daisy.m4p'
+            file: '../music/BlueHawaii/Untogether/08-Daisy.m4p'
         },
         {
             track: 9,
@@ -75,7 +85,7 @@ const BlueHawaii = {
             artist: 'Blue Hawaii',
             album: 'Untogether',
             duration: '3:54',
-            src: '../music/BlueHawaii/Untogether/09-Flammarion.m4p'
+            file: '../music/BlueHawaii/Untogether/09-Flammarion.m4p'
         },
         {
             track: 10,
@@ -83,7 +93,7 @@ const BlueHawaii = {
             artist: 'Blue Hawaii',
             album: 'Untogether',
             duration: '3:54',
-            src: '../music/BlueHawaii/Untogether/10-Reaction-II.m4p'
+            file: '../music/BlueHawaii/Untogether/10-Reaction-II.m4p'
         },
         {
             track: 11,
@@ -91,7 +101,7 @@ const BlueHawaii = {
             artist: 'Blue Hawaii',
             album: 'Untogether',
             duration: '3:54',
-            src: '../music/BlueHawaii/Untogether/11-The-Other-Day.m4p'
+            file: '../music/BlueHawaii/Untogether/11-The-Other-Day.m4p'
         }
     ]
 };
@@ -110,7 +120,7 @@ const EnemaOfTheState = {
             artist: 'Blink-182',
             album: 'Enema of the State',
             duration: '2:23',
-            src: "../music/Blink-182/EnemaOfTheState/Adam's-Song.mp3"
+            file: "../music/Blink-182/EnemaOfTheState/Adam's-Song.mp3"
         },
         {
             track: 2,
@@ -118,7 +128,7 @@ const EnemaOfTheState = {
             artist: 'Blink-182',
             album: 'Enema of the State',
             duration: '2:23',
-            src: "../music/Blink-182/EnemaOfTheState/Don't-Leave-Me.mp3"
+            file: "../music/Blink-182/EnemaOfTheState/Don't-Leave-Me.mp3"
         },
         {
             track: 3,
@@ -126,7 +136,7 @@ const EnemaOfTheState = {
             artist: 'Blink-182',
             album: 'Enema of the State',
             duration: '2:23',
-            src: '../music/Blink-182/EnemaOfTheState/Aliens-Exist.mp3'
+            file: '../music/Blink-182/EnemaOfTheState/Aliens-Exist.mp3'
         },
         {
             track: 4,
@@ -134,7 +144,7 @@ const EnemaOfTheState = {
             artist: 'Blink-182',
             album: 'Enema of the State',
             duration: '2:23',
-            src: '../music/Blink-182/EnemaOfTheState/Going-Away-to-College.mp3'
+            file: '../music/Blink-182/EnemaOfTheState/Going-Away-to-College.mp3'
         },
         {
             track: 5,
@@ -142,7 +152,7 @@ const EnemaOfTheState = {
             artist: 'Blink-182',
             album: 'Enema of the State',
             duration: '2:23',
-            src: '../music/Blink-182/EnemaOfTheState/Whats-My-Age-Again.mp3'
+            file: '../music/Blink-182/EnemaOfTheState/Whats-My-Age-Again.mp3'
         },
         {
             track: 6,
@@ -150,7 +160,7 @@ const EnemaOfTheState = {
             artist: 'Blink-182',
             album: 'Enema of the State',
             duration: '2:23',
-            src: '../music/Blink-182/EnemaOfTheState/Dysentery-Gary.mp3'
+            file: '../music/Blink-182/EnemaOfTheState/Dysentery-Gary.mp3'
         },
         {
             track: 7,
@@ -158,7 +168,7 @@ const EnemaOfTheState = {
             artist: 'Blink-182',
             album: 'Enema of the State',
             duration: '2:23',
-            src: '../music/Blink-182/EnemaOfTheState/Adams-Song.mp3'
+            file: '../music/Blink-182/EnemaOfTheState/Adams-Song.mp3'
         },
         {
             track: 8,
@@ -166,7 +176,7 @@ const EnemaOfTheState = {
             artist: 'Blink-182',
             album: 'Enema of the State',
             duration: '2:23',
-            src: '../music/Blink-182/EnemaOfTheState/All-The-Small-Things.mp3'
+            file: '../music/Blink-182/EnemaOfTheState/All-The-Small-Things.mp3'
         },
         {
             track: 9,
@@ -174,7 +184,7 @@ const EnemaOfTheState = {
             artist: 'Blink-182',
             album: 'Enema of the State',
             duration: '2:23',
-            src: '../music/Blink-182/EnemaOfTheState/The-Party-Song.mp3'
+            file: '../music/Blink-182/EnemaOfTheState/The-Party-Song.mp3'
         }
     ]
 }
@@ -192,7 +202,7 @@ const TheNewAbnormal = {
             artist: 'The Strokes',
             album: 'The New Abnormal',
             duration: '4:47',
-            src: '../music/TheStrokes/TheNewAbnormal/TheAdultsAreTalking.mp3'
+            file: TheAdultsAreTalking
         },
         {
             track: 2,
@@ -200,7 +210,7 @@ const TheNewAbnormal = {
             artist: 'The Strokes',
             album: 'The New Abnormal',
             duration: '3:17',
-            src: '../music/TheStrokes/TheNewAbnormal/Selfless.mp3'
+            file: Selfless
         },
         {
             track: 3,
@@ -208,7 +218,7 @@ const TheNewAbnormal = {
             artist: 'The Strokes',
             album: 'The New Abnormal',
             duration: '3:53',
-            src: '../music/TheStrokes/TheNewAbnormal/BrooklynBridgetoChorus.mp3'
+            file: BrooklynBridgeToChorus
         },
         {
             track: 4,
@@ -216,7 +226,7 @@ const TheNewAbnormal = {
             artist: 'The Strokes',
             album: 'The New Abnormal',
             duration: '4:53',
-            src: '../music/TheStrokes/TheNewAbnormal/BadDecisions.mp3'
+            file: BadDecisions
         },
         {
             track: 5,
@@ -224,7 +234,7 @@ const TheNewAbnormal = {
             artist: 'The Strokes',
             album: 'The New Abnormal',
             duration: '6:15',
-            src: '../music/TheStrokes/TheNewAbnormal/EternalSummer.mp3'
+            file: EternalSummer
         },
         {
             track: 6,
@@ -232,7 +242,7 @@ const TheNewAbnormal = {
             artist: 'The Strokes',
             album: 'The New Abnormal',
             duration: '5:10',
-            src: '../music/TheStrokes/TheNewAbnormal/AttheDoor.mp3'
+            file: AtTheDoor
         },
         {
             track: 7,
@@ -240,7 +250,7 @@ const TheNewAbnormal = {
             artist: 'The Strokes',
             album: 'The New Abnormal',
             duration: '4:35',
-            src: '../music/TheStrokes/TheNewAbnormal/WhyAreSundaysSoDepressing.mp3'
+            file: WhyAreSundaysSoDepressing
 
         },
         {
@@ -249,7 +259,7 @@ const TheNewAbnormal = {
             artist: 'The Strokes',
             album: 'The New Abnormal',
             duration: '5:47',
-            src: '../music/TheStrokes/TheNewAbnormal/NottheSameAnymore.mp3'
+            file: NotTheSameAnymore
         },
         {  
             track: 9,
@@ -257,7 +267,7 @@ const TheNewAbnormal = {
             artist: 'The Strokes',
             album: 'The New Abnormal',
             duration: '5:50',
-            src: '../music/TheStrokes/TheNewAbnormal/OdetotheMets.mp3'
+            file: OdeToTheMets
         }]
     };
 
