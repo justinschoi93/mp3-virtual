@@ -242,7 +242,6 @@ const TheNewAbnormal = {
             album: 'The New Abnormal',
             duration: '4:35',
             src: '../music/TheStrokes/TheNewAbnormal/WhyAreSundaysSoDepressing.mp3'
-
         },
         {
             track: 8,
@@ -262,7 +261,7 @@ const TheNewAbnormal = {
         }]
     };
 
-    export const albums = [TheNewAbnormal, BlueHawaii, EnemaOfTheState];
+    export const albums = [ TheNewAbnormal, BlueHawaii, EnemaOfTheState ];
 
     
     

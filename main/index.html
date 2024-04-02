@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>mp3 player</title>
     <link rel="icon" href="./assets/images/notes.png">
-    <!-- <link rel="stylesheet" href="./assets/src/style.css"> -->
+    <link rel="stylesheet" href="./assets/src/style.css">
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script> -->
 
 </head>
@@ -20,18 +20,20 @@
 
         </div>
         <div class="select-menus">
-            <div class="select-menu">
+            <div class="select-menu artists">
                 <select class="artist" id="artist-select">
-                    <option value="All Artists">All Artists</option>
+                    <option value="All Artists" selected>All Artists</option>
                 </select>
             </div>
-            <div class="select-menu">
+            <div class="select-menu albums">
                 <select class="albums" id="album-select">
-                    <option value="All Albums">All Albums</option>
+                    <option value="All Albums" selected>All Albums</option>
                 </select>
             </div>
-            <div class="select-menu">
-                <select class="tracks" id="track-select"></select>
+            <div class="select-menu tracks">
+                <select class="tracks" id="track-select">
+                    <option value="♫" selected>♫ ♫ ♫ ♫ ♫ ♫ ♫ ♫ ♫</option>
+                </select>
             </div>
         </div>
     </header>

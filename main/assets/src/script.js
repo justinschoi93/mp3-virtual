@@ -2,8 +2,7 @@
 import { albums } from './albums.js';
 import { artists } from './artists.js';
 
-// media controlls
-import './style.css';
+// import './style.css';
 
 // Current Track Info
 let power = false;
@@ -16,29 +15,43 @@ const artistSelect = document.getElementById('artist-select');
 const albumSelect = document.getElementById('album-select');
 const trackSelect = document.getElementById('track-select');
 
-let artist;
-let album;
-let track;
+let artist = artistSelect.value;
+let track = trackSelect.value;
+let album = albums.find((album, i) => album.name === albumSelect.value);
 
 function fetchValues () {
-    artist = artistSelect.value;
     if (albumSelect.value !== 'All Albums') {
-        album = albums.find((a, i) => a.name === albumSelect.value);
         track = album.tracks.find((t, i) => t.title === trackSelect.value);
     } else {
-        album = albums;
-        track = album.forEach( a => {
-            a.tracks.find((t, i) => t.title === trackSelect.value);
+        track = albums.forEach( album => {
+            album.tracks.find((t, i) => t.title === trackSelect.value);
         })
     }
+
 }
 
 // Populate Select Menus
-artists.forEach((artist) => {
-    let option = document.createElement('option');
-    option.text = artist;
-    artistSelect.appendChild(option);
-})
+function initSelects() {
+    artists.forEach((artist) => {
+        let option = document.createElement('option');
+        option.text = artist;
+        artistSelect.appendChild(option);
+    })
+    albums.forEach(album => {
+        let option = document.createElement('option');
+        option.text = album.name;
+        albumSelect.appendChild(option);
+    })
+    albums.forEach(album => {
+        album.tracks.forEach((track, i) => {
+            let option = document.createElement('option');
+            option.idx = i;
+            option.value = track.title;
+            option.text = `${option.idx + 1} - ${track.title}`;
+            trackSelect.appendChild(option);
+        })
+    })
+}
 
 function refreshAlbums (artist) {
     albumSelect.innerHTML = '';
@@ -65,19 +78,16 @@ function refreshTracks (album) {
 
     // Album selected
     if ( albumSelect === 'All Albums' ) { 
-        albumSelect.options.forEach( albumOption => {
-            albums.forEach( (album) => {
-                if (album.name === albumOption.value) {
-                    album.tracks.forEach((track, i) => {
-                        let option = document.createElement('option');
-                        option.idx = i;
-                        option.value = track.title;
-                        option.text = `${option.idx + 1} - ${track.title}` ;
-                        trackSelect.appendChild(option);
-                    })
-                }
+        albums.forEach( album => {
+            album.forEach((track, i) => {
+                let option = document.createElement('option');
+                option.idx = i;
+                option.value = track.title;
+                option.text = `${option.idx + 1} - ${track.title}` ;
+                trackSelect.appendChild(option);
             })
         })
+        
     } else {
         album.tracks.forEach((track, i) => {
             let option = document.createElement('option');
@@ -90,55 +100,37 @@ function refreshTracks (album) {
 
 }
 
-artists.forEach((artist, i) => {
-    let option = document.createElement('option');
-    option.text = artist;
-    option.idx = i;
-    artistSelect.appendChild(option);
-})
-
 // The selected option, which will be a string, will be used to select the correct object in the album array.
 // THe album object will be assgned as the value of album
 artistSelect.addEventListener('change', () => {
-    artist = artistSelect.value;
-    
-    albumSelect.innerHTML = ''; // Clear out old options
-    albumSelect = albums.forEach((album, i) => { // Add new options
-        if (album.artist === artist) {
-            const option = document.createElement('option');
-            option.text = album.name;
-            albumSelect.appendChild(option);
-        }
-    })
+    refreshAlbums( artistSelect.value);
+    albumSelect.dispatchEvent(new Event('change'));
 })
 
 albumSelect.addEventListener('change', () => {
-    album = albums.find((a, i) => a.name === albumSelect.value);
-    console.log(album);
-    albumSelect.value = album.name;
-    artist = album.name;
+    album = albums.find((album, i) => album.name === albumSelect.value);
+    refreshTracks( album);
+    trackSelect.dispatchEvent(new Event('change'));
     // Make tracklist responsive
 
-    current = album.tracks.find((track, i) => track.title === trackName);
-    displayTrack(current);
+    displayTrack(track);
 })
 
 trackSelect.addEventListener('change', () => {
 
-    console.log('trackSelect.value:', trackSelect.value)
-    let trackName = trackSelect.value;
-
+    
     if (playButton.style.display === 'none') {
         
         audioElement.pause();
-        current = album.tracks.name;
-
-        displayTrack(current);
+        track = album.tracks.find( track => track.title === trackSelect.value);
+        console.log('Selected track: ', track)
+        
+        displayTrack(track);
         pauseTrack(audioElement);
     } else {
         
-        current = album.tracks.find((track, i) => track.title === trackName);
-        displayTrack(current);
+        track = album.tracks.find( track => track.title === trackSelect.value);
+        displayTrack(track);
     }
 })
 
@@ -187,7 +179,7 @@ function playTrack(track){
     }
     
     audioElement.play().catch(error => console.error("Audio play failed:", error));    
-    console.log('Playing track:', current)
+    console.log('Playing track:', track)
     
     // Keep track of time elapsed
     intervalID = setInterval(() => {
@@ -202,7 +194,7 @@ function playTrack(track){
         if (timeElapsed === durationSeconds) {
             timeElapsed = 0;
             albumIdx++;
-            playTrack(current.tracks[albumIdx]);
+            playTrack(track.tracks[albumIdx]);
         }
 
     }, 1000);
@@ -231,39 +223,51 @@ function back() {
             playTrack(track);
     
         } else {
-            console.log('back 1 track to: ', album.tracks[albumIdx - 1]);
             
-            if (albumIdx > 1) albumIdx--;
-            audioElement.pause();
-            track = album.tracks[albumIdx]
-            audioElement = new Audio(current.file)
-
-            playTrack(current);
+            if (albumIdx > 0) {
+                albumIdx--;
+                timeElapsed = 0;
+                audioElement.pause();
+                track = album.tracks[albumIdx]
+                audioElement = new Audio(track.file)
+                
+                playTrack(track);
+                console.log('back 1 track to: ', album.tracks[albumIdx - 1]);
+            } else {
+                timeElapsed = 0;
+                audioElement.currentTime = 0;
+                audioElement.play();
+                console.log('replaying track: ', track)
+            }
         }
     } else {
         console.log('back 1 track to: ', album.tracks[albumIdx - 1]);
 
         if (albumIdx > 1) albumIdx--;
         track = album.tracks[albumIdx];
-        audioElement = new Audio(current.file);
+        audioElement = new Audio(track.file);
     }
 }
 
 function skip(){
     if (playButton.style.display === 'none') {
-        console.log('skipped track: ', current);
+        console.log('skipped track: ', track);
         
         audioElement.pause();
         albumIdx === album.tracks.length - 1 ? albumIdx = 0 : albumIdx++;
         track = album.tracks[albumIdx]
         audioElement = new Audio(track.file);
+        timeElapsed = 0;
+        theDot.style.left = 0;
 
         playTrack(track);
     } else {
-        console.log('skipped track: ', current)
+        console.log('skipped track: ', track)
         albumIdx === album.tracks.length - 1 ? albumIdx = 0 : albumIdx++;
-        current = album.tracks[albumIdx];
+        track = album.tracks[albumIdx];
         audioElement = new Audio(track.file);
+        timeElapsed = 0;
+        theDot.style.left = 0;
 
         displayTrack(track)
     }
@@ -276,6 +280,7 @@ document.addEventListener('DOMContentLoaded', () => {
     rewindButton.addEventListener('click', back);
     skipButton.addEventListener('click', skip);
     // User Input
+    initSelects();
     fetchValues();
     // Display
     displayTrack(track);
