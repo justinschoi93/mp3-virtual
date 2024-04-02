@@ -1,14 +1,15 @@
 // media content
 import { albums } from './albums.js';
 import { artists } from './artists.js';
-
-import './style.css';
+// import { albumCovers } from './albumCovers.js';
+// import './style.css';
 
 // Current Track Info
 let power = false;
 let albumIdx = 0;
 let timeElapsed = 0;
 let audioElement;
+let trackIdx = 0;
 
 // Select Menus
 const artistSelect = document.getElementById('artist-select');
@@ -118,18 +119,26 @@ albumSelect.addEventListener('change', () => {
 
 trackSelect.addEventListener('change', () => {
 
+    if (playButton.style.display === 'none') pauseTrack(audioElement);
     
-    if (playButton.style.display === 'none') {
-        audioElement.pause();
-        track = album.tracks.find( track => track.title === trackSelect.value);
-        console.log('Selected track: ', track)
-        
-        displayTrack(track);
-        pauseTrack(audioElement);
-    } else {
-        track = album.tracks.find( track => track.title === trackSelect.value);
-        displayTrack(track);
+    if (albumSelect.value === 'All Albums') { // All Albums
+        album = albums.find( album => album.tracks.find( (track, i) => {
+                                trackIdx = trackSelect.selectedIndex;
+                                return track.title === trackSelect.value;
+                            }));
+    } else { // Selected Album
+        album = albums.find( album => album.tracks.find( track => track.title === trackSelect.value))
     }
+    artistSelect.value = album.artist;
+    albumSelect.value = album.name;
+    track = album.tracks.find( track => track.title === trackSelect.value);
+    
+    console.log('Selected track: ', track)
+    console.log('from album: ', album)
+    
+    if (playButton.style.display === 'none') playTrack(track);
+    displayTrack(track);
+
 })
 
 
@@ -154,7 +163,7 @@ let intervalID;
 function displayTrack (track) {
     if (!track) return;
 
-    albumCoverD.src = album.albumArt ? album.albumArt : album.altPhoto;
+    albumCoverD.src = album.albumArt ? `../assets/images/${album.albumArt}` : `../assets/images/${album.altPhoto}`;
     trackNameD.innerHTML = track.title;
     trackArtistD.innerHTML = track.artist;
     trackAlbumD.innerHTML = track.album;
@@ -174,6 +183,7 @@ function playTrack(track){
     
     if (timeElapsed === 0) {
         audioElement = new Audio(track.file);
+        audioElement.id = track.title;
     }
     
     audioElement.play().catch(error => console.error("Audio play failed:", error));    
@@ -184,7 +194,7 @@ function playTrack(track){
         
         timeElapsed++;
 
-        let durationSplit = track.duration.split(':');
+        let durationSplit = String(track.duration).split(':');
         let durationSeconds = parseInt(durationSplit[0] * 60) + parseInt(durationSplit[1]);
         theDot.style.left = `${timeElapsed / durationSeconds * 100}%`;
         
@@ -273,8 +283,8 @@ function skip(){
 
 document.addEventListener('DOMContentLoaded', () => {
     // Buttons
-    playButton.addEventListener('click', playTrack);
-    pauseButton.addEventListener('click', pauseTrack);
+    playButton.addEventListener('click', () => playTrack(track));
+    pauseButton.addEventListener('click', () => pauseTrack(audioElement));
     rewindButton.addEventListener('click', back);
     skipButton.addEventListener('click', skip);
     // User Input
