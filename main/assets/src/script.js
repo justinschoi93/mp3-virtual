@@ -2,7 +2,7 @@
 import { albums } from './albums.js';
 import { artists } from './artists.js';
 
-// import './style.css';
+import './style.css';
 
 // Current Track Info
 let power = false;
@@ -120,7 +120,6 @@ trackSelect.addEventListener('change', () => {
 
     
     if (playButton.style.display === 'none') {
-        
         audioElement.pause();
         track = album.tracks.find( track => track.title === trackSelect.value);
         console.log('Selected track: ', track)
@@ -128,7 +127,6 @@ trackSelect.addEventListener('change', () => {
         displayTrack(track);
         pauseTrack(audioElement);
     } else {
-        
         track = album.tracks.find( track => track.title === trackSelect.value);
         displayTrack(track);
     }
