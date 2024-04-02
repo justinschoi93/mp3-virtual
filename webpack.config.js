@@ -33,7 +33,7 @@ const config = {
         rules: [
             {
                 test: /\.css$/i,
-                use: ['style-loader', 'css-loader'],
+                use: [stylesHandler, 'css-loader'],
             },
             // {
             //     test: /\.(png|svg|jpg|jpeg|gif)$/i,
@@ -49,6 +49,7 @@ const config = {
         new HtmlWebpackPlugin({
             template: 'index.html',
         }),
+        new MiniCssExtractPlugin({ filename: 'assets/src/style.css'}),
         new HotModuleReplacementPlugin(),
         new CopyWebpackPlugin({
             patterns: [
@@ -70,7 +71,6 @@ export default () => {
     if (isProduction) {
         config.mode = 'production';
         
-        config.plugins.push(new MiniCssExtractPlugin());
         
         
         config.plugins.push(new WorkboxWebpackPlugin.GenerateSW());

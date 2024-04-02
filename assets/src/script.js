@@ -2,7 +2,7 @@
 import { albums } from './albums.js';
 import { artists } from './artists.js';
 // import { albumCovers } from './albumCovers.js';
-// import './style.css';
+import './style.css';
 
 // Current Track Info
 let power = false;
