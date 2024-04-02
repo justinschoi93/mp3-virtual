@@ -79,8 +79,12 @@ function refreshTracks (album) {
             })
         })
     } else {
-        .tracks.forEach((track, i) => {
-
+        album.tracks.forEach((track, i) => {
+            let option = document.createElement('option');
+            option.idx = i;
+            option.value = track.title;
+            option.text = `${option.idx + 1} - ${track.title}`;
+            trackSelect.appendChild(option);
         })
     }
 
