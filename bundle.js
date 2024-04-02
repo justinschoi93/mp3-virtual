@@ -136,7 +136,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
   \******************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _albums_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./albums.js */ \"./assets/src/albums.js\");\n/* harmony import */ var _artists_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./artists.js */ \"./assets/src/artists.js\");\n/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./style.css */ \"./assets/src/style.css\");\n// media content\n\n\n\n\n\n// Current Track Info\nlet power = false;\nlet albumIdx = 0;\nlet timeElapsed = 0;\nlet audioElement;\n\n// Select Menus\nconst artistSelect = document.getElementById('artist-select');\nconst albumSelect = document.getElementById('album-select');\nconst trackSelect = document.getElementById('track-select');\n\nlet artist = artistSelect.value;\nlet track = trackSelect.value;\nlet album = _albums_js__WEBPACK_IMPORTED_MODULE_0__.albums.find((album, i) => album.name === albumSelect.value);\n\nfunction fetchValues () {\n    if (albumSelect.value !== 'All Albums') {\n        track = album.tracks.find((t, i) => t.title === trackSelect.value);\n    } else {\n        track = _albums_js__WEBPACK_IMPORTED_MODULE_0__.albums.forEach( album => {\n            album.tracks.find((t, i) => t.title === trackSelect.value);\n        })\n    }\n\n}\n\n// Populate Select Menus\nfunction initSelects() {\n    _artists_js__WEBPACK_IMPORTED_MODULE_1__.artists.forEach((artist) => {\n        let option = document.createElement('option');\n        option.text = artist;\n        artistSelect.appendChild(option);\n    })\n    _albums_js__WEBPACK_IMPORTED_MODULE_0__.albums.forEach(album => {\n        let option = document.createElement('option');\n        option.text = album.name;\n        albumSelect.appendChild(option);\n    })\n    _albums_js__WEBPACK_IMPORTED_MODULE_0__.albums.forEach(album => {\n        album.tracks.forEach((track, i) => {\n            let option = document.createElement('option');\n            option.idx = i;\n            option.value = track.title;\n            option.text = `${option.idx + 1} - ${track.title}`;\n            trackSelect.appendChild(option);\n        })\n    })\n}\n\nfunction refreshAlbums (artist) {\n    albumSelect.innerHTML = '';\n\n    if (artist === 'All Artists') {\n        _albums_js__WEBPACK_IMPORTED_MODULE_0__.albums.forEach((album, i) => {\n            let option = document.createElement('option');\n            option.text = album.name;\n            albumSelect.appendChild(option);\n        })\n    } else {\n        _albums_js__WEBPACK_IMPORTED_MODULE_0__.albums.forEach((album, i) => {\n            if (album.artist === artist) {\n                let option = document.createElement('option');\n                option.text = album.name;\n                albumSelect.appendChild(option);\n            }\n        })\n    }\n}\n\nfunction refreshTracks (album) {\n    trackSelect.innerHTML = '';\n\n    // Album selected\n    if ( albumSelect === 'All Albums' ) { \n        _albums_js__WEBPACK_IMPORTED_MODULE_0__.albums.forEach( album => {\n            album.forEach((track, i) => {\n                let option = document.createElement('option');\n                option.idx = i;\n                option.value = track.title;\n                option.text = `${option.idx + 1} - ${track.title}` ;\n                trackSelect.appendChild(option);\n            })\n        })\n        \n    } else {\n        album.tracks.forEach((track, i) => {\n            let option = document.createElement('option');\n            option.idx = i;\n            option.value = track.title;\n            option.text = `${option.idx + 1} - ${track.title}`;\n            trackSelect.appendChild(option);\n        })\n    }\n\n}\n\n// The selected option, which will be a string, will be used to select the correct object in the album array.\n// THe album object will be assgned as the value of album\nartistSelect.addEventListener('change', () => {\n    refreshAlbums( artistSelect.value);\n    albumSelect.dispatchEvent(new Event('change'));\n})\n\nalbumSelect.addEventListener('change', () => {\n    album = _albums_js__WEBPACK_IMPORTED_MODULE_0__.albums.find((album, i) => album.name === albumSelect.value);\n    refreshTracks( album);\n    trackSelect.dispatchEvent(new Event('change'));\n    // Make tracklist responsive\n\n    displayTrack(track);\n})\n\ntrackSelect.addEventListener('change', () => {\n\n    \n    if (playButton.style.display === 'none') {\n        audioElement.pause();\n        track = album.tracks.find( track => track.title === trackSelect.value);\n        console.log('Selected track: ', track)\n        \n        displayTrack(track);\n        pauseTrack(audioElement);\n    } else {\n        track = album.tracks.find( track => track.title === trackSelect.value);\n        displayTrack(track);\n    }\n})\n\n\n// Media Info\n\nconst trackNameD = document.querySelector('#track-title');\nconst trackArtistD = document.querySelector('#track-artist');\nconst trackAlbumD = document.querySelector('#track-album');\nconst albumCoverD = document.getElementById('album-cover');\n\n// Media Controller\nconst playButton = document.getElementById('play-button');\nconst pauseButton = document.getElementById('pause-button');\nconst rewindButton = document.getElementById('rwd-button');\nconst skipButton = document.getElementById('ff-button');\nconst theBar = document.getElementById('the-bar');\nconst theDot = document.getElementById('the-dot');\n\n// IntervalID used for play & pause buttons\nlet intervalID;\n\nfunction displayTrack (track) {\n    if (!track) return;\n\n    albumCoverD.src = album.albumArt ? album.albumArt : album.altPhoto;\n    trackNameD.innerHTML = track.title;\n    trackArtistD.innerHTML = track.artist;\n    trackAlbumD.innerHTML = track.album;\n}\n\n\nfunction playTrack(track){\n    if (!power) power = 'on';\n    displayTrack(track);\n    \n    if (!albumSelect.value){ \n        console.log('No track found');\n    }\n    \n    playButton.style.display = 'none';\n    pauseButton.style.display = 'block';\n    \n    if (timeElapsed === 0) {\n        audioElement = new Audio(track.file);\n    }\n    \n    audioElement.play().catch(error => console.error(\"Audio play failed:\", error));    \n    console.log('Playing track:', track)\n    \n    // Keep track of time elapsed\n    intervalID = setInterval(() => {\n        \n        timeElapsed++;\n\n        let durationSplit = track.duration.split(':');\n        let durationSeconds = parseInt(durationSplit[0] * 60) + parseInt(durationSplit[1]);\n        theDot.style.left = `${timeElapsed / durationSeconds * 100}%`;\n        \n        // End of Track behavior\n        if (timeElapsed === durationSeconds) {\n            timeElapsed = 0;\n            albumIdx++;\n            playTrack(track.tracks[albumIdx]);\n        }\n\n    }, 1000);\n}\n\nfunction pauseTrack(audioElement){\n    console.log('Pausing track:', track)\n    playButton.style.display = 'block';\n    pauseButton.style.display = 'none';\n\n    audioElement.pause();\n    \n    clearInterval(intervalID);\n}\n\nfunction back() {\n    \n    if (playButton.style.display === 'none') {\n        if (timeElapsed > 5) {\n            timeElapsed = 0;\n\n            console.log('rewinding track: ', track)\n\n            audioElement.pause();\n            \n            playTrack(track);\n    \n        } else {\n            \n            if (albumIdx > 0) {\n                albumIdx--;\n                timeElapsed = 0;\n                audioElement.pause();\n                track = album.tracks[albumIdx]\n                audioElement = new Audio(track.file)\n                \n                playTrack(track);\n                console.log('back 1 track to: ', album.tracks[albumIdx - 1]);\n            } else {\n                timeElapsed = 0;\n                audioElement.currentTime = 0;\n                audioElement.play();\n                console.log('replaying track: ', track)\n            }\n        }\n    } else {\n        console.log('back 1 track to: ', album.tracks[albumIdx - 1]);\n\n        if (albumIdx > 1) albumIdx--;\n        track = album.tracks[albumIdx];\n        audioElement = new Audio(track.file);\n    }\n}\n\nfunction skip(){\n    if (playButton.style.display === 'none') {\n        console.log('skipped track: ', track);\n        \n        audioElement.pause();\n        albumIdx === album.tracks.length - 1 ? albumIdx = 0 : albumIdx++;\n        track = album.tracks[albumIdx]\n        audioElement = new Audio(track.file);\n        timeElapsed = 0;\n        theDot.style.left = 0;\n\n        playTrack(track);\n    } else {\n        console.log('skipped track: ', track)\n        albumIdx === album.tracks.length - 1 ? albumIdx = 0 : albumIdx++;\n        track = album.tracks[albumIdx];\n        audioElement = new Audio(track.file);\n        timeElapsed = 0;\n        theDot.style.left = 0;\n\n        displayTrack(track)\n    }\n}\n\ndocument.addEventListener('DOMContentLoaded', () => {\n    // Buttons\n    playButton.addEventListener('click', playTrack);\n    pauseButton.addEventListener('click', pauseTrack);\n    rewindButton.addEventListener('click', back);\n    skipButton.addEventListener('click', skip);\n    // User Input\n    initSelects();\n    fetchValues();\n    // Display\n    displayTrack(track);\n})\n\n\n\n\n\n// theDot.addEventListener('click', ()=>{}); // TODO: updateTimeElapsed()\n// theDot.addEventListener('mousedown', () => {\n//     track.pause();\n// });\n// theDot.addEventListener('mouseup', () => {\n//     track.play();\n// });\n\n//# sourceURL=webpack://my-webpack-project/./assets/src/script.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _albums_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./albums.js */ \"./assets/src/albums.js\");\n/* harmony import */ var _artists_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./artists.js */ \"./assets/src/artists.js\");\n/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./style.css */ \"./assets/src/style.css\");\n// media content\n\n\n// import { albumCovers } from './albumCovers.js';\n\n\n// Current Track Info\nlet power = false;\nlet albumIdx = 0;\nlet timeElapsed = 0;\nlet audioElement;\nlet trackIdx = 0;\n\n// Select Menus\nconst artistSelect = document.getElementById('artist-select');\nconst albumSelect = document.getElementById('album-select');\nconst trackSelect = document.getElementById('track-select');\n\nlet artist = artistSelect.value;\nlet track = trackSelect.value;\nlet album = _albums_js__WEBPACK_IMPORTED_MODULE_0__.albums.find((album, i) => album.name === albumSelect.value);\n\nfunction fetchValues () {\n    if (albumSelect.value !== 'All Albums') {\n        track = album.tracks.find((t, i) => t.title === trackSelect.value);\n    } else {\n        track = _albums_js__WEBPACK_IMPORTED_MODULE_0__.albums.forEach( album => {\n            album.tracks.find((t, i) => t.title === trackSelect.value);\n        })\n    }\n\n}\n\n// Populate Select Menus\nfunction initSelects() {\n    _artists_js__WEBPACK_IMPORTED_MODULE_1__.artists.forEach((artist) => {\n        let option = document.createElement('option');\n        option.text = artist;\n        artistSelect.appendChild(option);\n    })\n    _albums_js__WEBPACK_IMPORTED_MODULE_0__.albums.forEach(album => {\n        let option = document.createElement('option');\n        option.text = album.name;\n        albumSelect.appendChild(option);\n    })\n    _albums_js__WEBPACK_IMPORTED_MODULE_0__.albums.forEach(album => {\n        album.tracks.forEach((track, i) => {\n            let option = document.createElement('option');\n            option.idx = i;\n            option.value = track.title;\n            option.text = `${option.idx + 1} - ${track.title}`;\n            trackSelect.appendChild(option);\n        })\n    })\n}\n\nfunction refreshAlbums (artist) {\n    albumSelect.innerHTML = '';\n\n    if (artist === 'All Artists') {\n        _albums_js__WEBPACK_IMPORTED_MODULE_0__.albums.forEach((album, i) => {\n            let option = document.createElement('option');\n            option.text = album.name;\n            albumSelect.appendChild(option);\n        })\n    } else {\n        _albums_js__WEBPACK_IMPORTED_MODULE_0__.albums.forEach((album, i) => {\n            if (album.artist === artist) {\n                let option = document.createElement('option');\n                option.text = album.name;\n                albumSelect.appendChild(option);\n            }\n        })\n    }\n}\n\nfunction refreshTracks (album) {\n    trackSelect.innerHTML = '';\n\n    // Album selected\n    if ( albumSelect === 'All Albums' ) { \n        _albums_js__WEBPACK_IMPORTED_MODULE_0__.albums.forEach( album => {\n            album.forEach((track, i) => {\n                let option = document.createElement('option');\n                option.idx = i;\n                option.value = track.title;\n                option.text = `${option.idx + 1} - ${track.title}` ;\n                trackSelect.appendChild(option);\n            })\n        })\n        \n    } else {\n        album.tracks.forEach((track, i) => {\n            let option = document.createElement('option');\n            option.idx = i;\n            option.value = track.title;\n            option.text = `${option.idx + 1} - ${track.title}`;\n            trackSelect.appendChild(option);\n        })\n    }\n\n}\n\n// The selected option, which will be a string, will be used to select the correct object in the album array.\n// THe album object will be assgned as the value of album\nartistSelect.addEventListener('change', () => {\n    refreshAlbums( artistSelect.value);\n    albumSelect.dispatchEvent(new Event('change'));\n})\n\nalbumSelect.addEventListener('change', () => {\n    album = _albums_js__WEBPACK_IMPORTED_MODULE_0__.albums.find((album, i) => album.name === albumSelect.value);\n    refreshTracks( album);\n    trackSelect.dispatchEvent(new Event('change'));\n    // Make tracklist responsive\n\n    displayTrack(track);\n})\n\ntrackSelect.addEventListener('change', () => {\n\n    if (playButton.style.display === 'none') pauseTrack(audioElement);\n    \n    if (albumSelect.value === 'All Albums') { // All Albums\n        album = _albums_js__WEBPACK_IMPORTED_MODULE_0__.albums.find( album => album.tracks.find( (track, i) => {\n                                trackIdx = trackSelect.selectedIndex;\n                                return track.title === trackSelect.value;\n                            }));\n    } else { // Selected Album\n        album = _albums_js__WEBPACK_IMPORTED_MODULE_0__.albums.find( album => album.tracks.find( track => track.title === trackSelect.value))\n    }\n    artistSelect.value = album.artist;\n    albumSelect.value = album.name;\n    track = album.tracks.find( track => track.title === trackSelect.value);\n    \n    console.log('Selected track: ', track)\n    console.log('from album: ', album)\n    \n    if (playButton.style.display === 'none') playTrack(track);\n    displayTrack(track);\n\n})\n\n\n// Media Info\n\nconst trackNameD = document.querySelector('#track-title');\nconst trackArtistD = document.querySelector('#track-artist');\nconst trackAlbumD = document.querySelector('#track-album');\nconst albumCoverD = document.getElementById('album-cover');\n\n// Media Controller\nconst playButton = document.getElementById('play-button');\nconst pauseButton = document.getElementById('pause-button');\nconst rewindButton = document.getElementById('rwd-button');\nconst skipButton = document.getElementById('ff-button');\nconst theBar = document.getElementById('the-bar');\nconst theDot = document.getElementById('the-dot');\n\n// IntervalID used for play & pause buttons\nlet intervalID;\n\nfunction displayTrack (track) {\n    if (!track) return;\n\n    albumCoverD.src = album.albumArt ? `../assets/images/${album.albumArt}` : `../assets/images/${album.altPhoto}`;\n    trackNameD.innerHTML = track.title;\n    trackArtistD.innerHTML = track.artist;\n    trackAlbumD.innerHTML = track.album;\n}\n\n\nfunction playTrack(track){\n    if (!power) power = 'on';\n    displayTrack(track);\n    \n    if (!albumSelect.value){ \n        console.log('No track found');\n    }\n    \n    playButton.style.display = 'none';\n    pauseButton.style.display = 'block';\n    \n    if (timeElapsed === 0) {\n        audioElement = new Audio(track.file);\n        audioElement.id = track.title;\n    }\n    \n    audioElement.play().catch(error => console.error(\"Audio play failed:\", error));    \n    console.log('Playing track:', track)\n    \n    // Keep track of time elapsed\n    intervalID = setInterval(() => {\n        \n        timeElapsed++;\n\n        let durationSplit = String(track.duration).split(':');\n        let durationSeconds = parseInt(durationSplit[0] * 60) + parseInt(durationSplit[1]);\n        theDot.style.left = `${timeElapsed / durationSeconds * 100}%`;\n        \n        // End of Track behavior\n        if (timeElapsed === durationSeconds) {\n            timeElapsed = 0;\n            albumIdx++;\n            playTrack(track.tracks[albumIdx]);\n        }\n\n    }, 1000);\n}\n\nfunction pauseTrack(audioElement){\n    console.log('Pausing track:', track)\n    playButton.style.display = 'block';\n    pauseButton.style.display = 'none';\n\n    audioElement.pause();\n    \n    clearInterval(intervalID);\n}\n\nfunction back() {\n    \n    if (playButton.style.display === 'none') {\n        if (timeElapsed > 5) {\n            timeElapsed = 0;\n\n            console.log('rewinding track: ', track)\n\n            audioElement.pause();\n            \n            playTrack(track);\n    \n        } else {\n            \n            if (albumIdx > 0) {\n                albumIdx--;\n                timeElapsed = 0;\n                audioElement.pause();\n                track = album.tracks[albumIdx]\n                audioElement = new Audio(track.file)\n                \n                playTrack(track);\n                console.log('back 1 track to: ', album.tracks[albumIdx - 1]);\n            } else {\n                timeElapsed = 0;\n                audioElement.currentTime = 0;\n                audioElement.play();\n                console.log('replaying track: ', track)\n            }\n        }\n    } else {\n        console.log('back 1 track to: ', album.tracks[albumIdx - 1]);\n\n        if (albumIdx > 1) albumIdx--;\n        track = album.tracks[albumIdx];\n        audioElement = new Audio(track.file);\n    }\n}\n\nfunction skip(){\n    if (playButton.style.display === 'none') {\n        console.log('skipped track: ', track);\n        \n        audioElement.pause();\n        albumIdx === album.tracks.length - 1 ? albumIdx = 0 : albumIdx++;\n        track = album.tracks[albumIdx]\n        audioElement = new Audio(track.file);\n        timeElapsed = 0;\n        theDot.style.left = 0;\n\n        playTrack(track);\n    } else {\n        console.log('skipped track: ', track)\n        albumIdx === album.tracks.length - 1 ? albumIdx = 0 : albumIdx++;\n        track = album.tracks[albumIdx];\n        audioElement = new Audio(track.file);\n        timeElapsed = 0;\n        theDot.style.left = 0;\n\n        displayTrack(track)\n    }\n}\n\ndocument.addEventListener('DOMContentLoaded', () => {\n    // Buttons\n    playButton.addEventListener('click', () => playTrack(track));\n    pauseButton.addEventListener('click', () => pauseTrack(audioElement));\n    rewindButton.addEventListener('click', back);\n    skipButton.addEventListener('click', skip);\n    // User Input\n    initSelects();\n    fetchValues();\n    // Display\n    displayTrack(track);\n})\n\n\n\n\n\n// theDot.addEventListener('click', ()=>{}); // TODO: updateTimeElapsed()\n// theDot.addEventListener('mousedown', () => {\n//     track.pause();\n// });\n// theDot.addEventListener('mouseup', () => {\n//     track.play();\n// });\n\n//# sourceURL=webpack://my-webpack-project/./assets/src/script.js?");
 
 /***/ })
 
@@ -218,6 +218,15 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _alb
 /******/ 		};
 /******/ 	})();
 /******/ 	
+/******/ 	/* webpack/runtime/get mini-css chunk filename */
+/******/ 	(() => {
+/******/ 		// This function allow to reference async chunks
+/******/ 		__webpack_require__.miniCssF = (chunkId) => {
+/******/ 			// return url for filenames based on template
+/******/ 			return undefined;
+/******/ 		};
+/******/ 	})();
+/******/ 	
 /******/ 	/* webpack/runtime/get update manifest filename */
 /******/ 	(() => {
 /******/ 		__webpack_require__.hmrF = () => ("main." + __webpack_require__.h() + ".hot-update.json");
@@ -225,7 +234,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _alb
 /******/ 	
 /******/ 	/* webpack/runtime/getFullHash */
 /******/ 	(() => {
-/******/ 		__webpack_require__.h = () => ("38fb9c1c6af3e2341598")
+/******/ 		__webpack_require__.h = () => ("91ea8dde96b9ed172f49")
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/global */
@@ -715,6 +724,103 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _alb
 /******/ 		if (!scriptUrl) throw new Error("Automatic publicPath is not supported in this browser");
 /******/ 		scriptUrl = scriptUrl.replace(/#.*$/, "").replace(/\?.*$/, "").replace(/\/[^\/]+$/, "/");
 /******/ 		__webpack_require__.p = scriptUrl;
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/css loading */
+/******/ 	(() => {
+/******/ 		if (typeof document === "undefined") return;
+/******/ 		var createStylesheet = (chunkId, fullhref, oldTag, resolve, reject) => {
+/******/ 			var linkTag = document.createElement("link");
+/******/ 		
+/******/ 			linkTag.rel = "stylesheet";
+/******/ 			linkTag.type = "text/css";
+/******/ 			if (__webpack_require__.nc) {
+/******/ 				linkTag.nonce = __webpack_require__.nc;
+/******/ 			}
+/******/ 			var onLinkComplete = (event) => {
+/******/ 				// avoid mem leaks.
+/******/ 				linkTag.onerror = linkTag.onload = null;
+/******/ 				if (event.type === 'load') {
+/******/ 					resolve();
+/******/ 				} else {
+/******/ 					var errorType = event && event.type;
+/******/ 					var realHref = event && event.target && event.target.href || fullhref;
+/******/ 					var err = new Error("Loading CSS chunk " + chunkId + " failed.\n(" + errorType + ": " + realHref + ")");
+/******/ 					err.name = "ChunkLoadError";
+/******/ 					err.code = "CSS_CHUNK_LOAD_FAILED";
+/******/ 					err.type = errorType;
+/******/ 					err.request = realHref;
+/******/ 					if (linkTag.parentNode) linkTag.parentNode.removeChild(linkTag)
+/******/ 					reject(err);
+/******/ 				}
+/******/ 			}
+/******/ 			linkTag.onerror = linkTag.onload = onLinkComplete;
+/******/ 			linkTag.href = fullhref;
+/******/ 		
+/******/ 		
+/******/ 			if (oldTag) {
+/******/ 				oldTag.parentNode.insertBefore(linkTag, oldTag.nextSibling);
+/******/ 			} else {
+/******/ 				document.head.appendChild(linkTag);
+/******/ 			}
+/******/ 			return linkTag;
+/******/ 		};
+/******/ 		var findStylesheet = (href, fullhref) => {
+/******/ 			var existingLinkTags = document.getElementsByTagName("link");
+/******/ 			for(var i = 0; i < existingLinkTags.length; i++) {
+/******/ 				var tag = existingLinkTags[i];
+/******/ 				var dataHref = tag.getAttribute("data-href") || tag.getAttribute("href");
+/******/ 				if(tag.rel === "stylesheet" && (dataHref === href || dataHref === fullhref)) return tag;
+/******/ 			}
+/******/ 			var existingStyleTags = document.getElementsByTagName("style");
+/******/ 			for(var i = 0; i < existingStyleTags.length; i++) {
+/******/ 				var tag = existingStyleTags[i];
+/******/ 				var dataHref = tag.getAttribute("data-href");
+/******/ 				if(dataHref === href || dataHref === fullhref) return tag;
+/******/ 			}
+/******/ 		};
+/******/ 		var loadStylesheet = (chunkId) => {
+/******/ 			return new Promise((resolve, reject) => {
+/******/ 				var href = __webpack_require__.miniCssF(chunkId);
+/******/ 				var fullhref = __webpack_require__.p + href;
+/******/ 				if(findStylesheet(href, fullhref)) return resolve();
+/******/ 				createStylesheet(chunkId, fullhref, null, resolve, reject);
+/******/ 			});
+/******/ 		}
+/******/ 		// no chunk loading
+/******/ 		
+/******/ 		var oldTags = [];
+/******/ 		var newTags = [];
+/******/ 		var applyHandler = (options) => {
+/******/ 			return { dispose: () => {
+/******/ 				for(var i = 0; i < oldTags.length; i++) {
+/******/ 					var oldTag = oldTags[i];
+/******/ 					if(oldTag.parentNode) oldTag.parentNode.removeChild(oldTag);
+/******/ 				}
+/******/ 				oldTags.length = 0;
+/******/ 			}, apply: () => {
+/******/ 				for(var i = 0; i < newTags.length; i++) newTags[i].rel = "stylesheet";
+/******/ 				newTags.length = 0;
+/******/ 			} };
+/******/ 		}
+/******/ 		__webpack_require__.hmrC.miniCss = (chunkIds, removedChunks, removedModules, promises, applyHandlers, updatedModulesList) => {
+/******/ 			applyHandlers.push(applyHandler);
+/******/ 			chunkIds.forEach((chunkId) => {
+/******/ 				var href = __webpack_require__.miniCssF(chunkId);
+/******/ 				var fullhref = __webpack_require__.p + href;
+/******/ 				var oldTag = findStylesheet(href, fullhref);
+/******/ 				if(!oldTag) return;
+/******/ 				promises.push(new Promise((resolve, reject) => {
+/******/ 					var tag = createStylesheet(chunkId, fullhref, oldTag, () => {
+/******/ 						tag.as = "style";
+/******/ 						tag.rel = "preload";
+/******/ 						resolve();
+/******/ 					}, reject);
+/******/ 					oldTags.push(oldTag);
+/******/ 					newTags.push(tag);
+/******/ 				}));
+/******/ 			});
+/******/ 		}
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/jsonp chunk loading */
