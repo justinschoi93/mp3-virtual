@@ -4,11 +4,13 @@
   "description": "My webpack project",
   "private": "true",
   "type": "module",
+  "homepage" : "https://justinschoi93.github.io/mp3-player",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npx webpack",
     "build:dev": "webpack --mode=development",
     "build:prod": "webpack --mode=production --node-env=production",
+    "deploy": "gh-pages -d dist",
     "watch": "webpack --watch",
     "serve": "webpack serve"
   },
@@ -26,7 +28,6 @@
   "bugs": {
     "url": "https://github.com/justinschoi93/mp3-player/issues"
   },
-  "homepage": "https://github.com/justinschoi93/mp3-player#readme",
   "devDependencies": {
     "@babel/core": "^7.24.3",
     "@babel/preset-env": "^7.24.3",
@@ -49,6 +50,7 @@
     "workbox-webpack-plugin": "^7.0.0"
   },
   "dependencies": {
+    "gh-pages": "^6.1.1",
     "lodash": "^4.17.21"
   }
 }
