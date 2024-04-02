@@ -21,7 +21,7 @@ const stylesHandler = isProduction ? MiniCssExtractPlugin.loader : 'style-loader
 const config = {
     entry: './assets/src/script.js',
     output: {
-        path: path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../dist'),
+        path: path.resolve(path.dirname(fileURLToPath(import.meta.url)), 'dist'),
         filename: 'bundle.js',
         assetModuleFilename: '[hash].[ext][query]'
     },
