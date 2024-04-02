@@ -16,18 +16,48 @@ const artistSelect = document.getElementById('artist-select');
 const albumSelect = document.getElementById('album-select');
 const trackSelect = document.getElementById('track-select');
 
-let artist = artistSelect.value;
-let track = trackSelect.value;
-let album = albums.find((album, i) => album.name === albumSelect.value);
+let artist;
+let track;
+let album;
+
 
 function fetchValues () {
-    if (albumSelect.value !== 'All Albums') {
-        track = album.tracks.find((t, i) => t.title === trackSelect.value);
-    } else {
-        track = albums.forEach( album => {
-            album.tracks.find((t, i) => t.title === trackSelect.value);
-        })
+    artist = artistSelect.value;
+                                                                        // Artist selected
+    if (artist !== 'All Artists') {
+        if (albumSelect.value !== 'All Albums') {                                   // Album selected
+            album = albums.find((album, i) => album.name === albumSelect.value)  
+                                       // if rack selected
+            if (trackSelect.value === '♫' ) {
+                track = album.tracks[0]
+            } else {
+                track = album.tracks.find((track, i) => track.title === trackSelect.value);
+            }                                            // No track selected
+        } else {                                                                       // All Albums
+            if (!trackSelect.value) track = albums.find((a, i) => a.artist === artist).tracks[0];           // No track selected
+            track = albums.filter((a, i) => a.artist === artist).find( a => {                               // Track selected
+                album = a;
+                a.tracks.find((t, i) => { t.title === trackSelect.value })});
+        }
+    } else {                                                            // All artists
+        if (albumSelect.value !== 'All Albums') {                                       // Album selected
+            album = albums.find( a => a.name === albumSelect.value);
+            if (trackSelect.value !== '♫') {                                                                   // Track selected        
+                track = album.tracks.find( t => t.title === trackSelect.value );
+            } else {                                                                                            // No track selected    
+                track = album.tracks[0];
+            }
+        } else {                                                                        // All Albums
+            if (trackSelect.value !== '♫') {                                                                   // Track selected      
+                track = albums.find( a => a.name === albumSelect.value).tracks.find( t => t.title === trackSelect.value);
+            } else {                                                                                            // No track selected
+                track = albums.find( a => a.name === albumSelect.value).tracks[0];
+            }
+                                                                                           // Track & Album & Artist selected
+        }
     }
+    // else 
+
 
 }
 
@@ -161,7 +191,7 @@ const theDot = document.getElementById('the-dot');
 let intervalID;
 
 function displayTrack (track) {
-    if (!track) return;
+    if (!track || track.value === '♫') return;
 
     albumCoverD.src = album.albumArt ? `../assets/images/${album.albumArt}` : `../assets/images/${album.altPhoto}`;
     trackNameD.innerHTML = track.title;
