@@ -35,14 +35,17 @@ const config = {
                 test: /\.css$/i,
                 use: [stylesHandler, 'css-loader'],
             },
-            // {
-            //     test: /\.(png|svg|jpg|jpeg|gif)$/i,
-            //     type: 'asset/resource',
-            // },
-            // {
-            //     test: /\.(mp3)$/i,
-            //     use: ['url-loader'],
-            // }
+            {
+                test: /\.(png|svg|jpg|jpeg|gif)$/i,
+                type: 'asset/resource',
+            },
+            {
+                test: /\.(mp3)$/i,
+                type: 'asset/resource',
+                generator: {
+                    filename: 'assets/music/[name][ext]'
+                }
+            }
         ]
     },
     plugins: [
@@ -53,30 +56,23 @@ const config = {
         new HotModuleReplacementPlugin(),
         new CopyWebpackPlugin({
             patterns: [
-                { from: 'assets/images', to: 'assets/images' },
-                { from: 'assets/music', to: 'assets/music' }
+                { from: 'assets/', to: 'assets/' }
             ]
         }),
-
         // Add your plugins here
         // Learn more about plugins from https://webpack.js.org/configuration/plugins/
     ],
-    stats: {
-        errorDetails: true
-    }
-    
+    stats: { errorDetails: true }
 };
 
 export default () => {
     if (isProduction) {
         config.mode = 'production';
-        
-        
-        
         config.plugins.push(new WorkboxWebpackPlugin.GenerateSW());
         
     } else {
         config.mode = 'development';
     }
+
     return config;
 };
